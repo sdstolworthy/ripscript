@@ -26,7 +26,7 @@ fi
     if [[ ${DVDNAME^^} == DVD_VIDEO ]]; then
         DVDNAME+=$((`date +%s`*1000+`date +%-N`/1000000))
     fi
-    WORKPATH="/tmp/rips"
+    WORKPATH="/var/rips"
 
     echo ">>>>>>>>>>>>>>>>>>>>>>>>Beginning script to rip: $DVDNAME"
     echo $USER

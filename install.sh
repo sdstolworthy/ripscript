@@ -12,7 +12,7 @@ mkdir -p /etc
 mkdir -p /var/log
 mkdir -p /etc/systemd/system
 mkdir -p /etc/udev/rules.d/
-mkdir -p /tmp/rips
+mkdir -p /var/rips
 
 echo "Installing files"
 chmod a+x ./dvdrip@.service
