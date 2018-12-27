@@ -7,19 +7,14 @@ fi
     sleep 2
     date
     mount -a
-    # if [ $1 = '/dev/sr0' ]; then
-    # 	DISNUM=1
-    # elif [ $1 = '/dev/sr1' ]; then
-    # 	DISNUM=0
-    # else
-    # 	echo "CONGRESS HAS NOT COME TO A DECISION; IMMINENT FAILURE"
-    # 	exit
-    # fi
-    
-    DISNUM=0
+    if [[ $1 == *"/dev/sr"* ]]; then
+        DISNUM=$(echo $1 | grep -oP '\d')
+    else
+        echo "Error finding correct disk number. Found $DISNUM, but this number does not seem to exist"
+    fi
     
     DVDNAME=$(makemkvcon -r info)
-    DVDNAME=$`echo "$DVDNAME" | grep "DRV:$DISNUM\+"`
+    DVDNAME=`echo "$DVDNAME" | grep "DRV:$DISNUM\+"`
     DVDNAME=${DVDNAME:53}
     len=${#DVDNAME}-12
     DVDNAME=${DVDNAME:0:$len}
@@ -31,9 +26,8 @@ fi
     if [[ ${DVDNAME^^} == DVD_VIDEO ]]; then
         DVDNAME+=$((`date +%s`*1000+`date +%-N`/1000000))
     fi
-    #DVDNAME=$(sudo blkid -o value -s LABEL '$1')
     WORKPATH="/tmp/rips"
-    
+
     echo ">>>>>>>>>>>>>>>>>>>>>>>>Beginning script to rip: $DVDNAME"
     echo $USER
     
@@ -44,8 +38,6 @@ fi
     
     echo $DVDNAME
     eject
-    echo "$DVDNAME is finished ripping" | mail -s "$DVDNAME is finished!" sdstolworthy@gmail.com
-    curl http://textbelt.com/text -d number=6154978333 -d "message=$DVDNAME is finished ripping. Change me!"
     echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>Copying $DVDNAME to /mnt/movie/$DVDNAME.mkv"
     mv $WORKPATH/* /media/server/$DVDNAME.mkv
     echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>Copying Finished! Script Complete!"
