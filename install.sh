@@ -6,6 +6,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Create the needed directories
+echo "Creating directories"
 mkdir -p /usr/bin
 mkdir -p /etc
 mkdir -p /var/log
@@ -13,15 +14,21 @@ mkdir -p /etc/systemd/system
 mkdir -p /etc/udev/rules.d/
 mkdir -p /tmp/rips
 
+echo "Installing files"
 chmod a+x ./dvdrip@.service
-mv ./dvdrip@.service /etc/systemd/system
+cp ./dvdrip@.service /etc/systemd/system
 
 chmod a+x ./ripscript.sh
-mv ./ripscript.sh /usr/bin/ripscript
+cp ./ripscript.sh /usr/bin/ripscript
 
 chmod a+x ./riplauncher.sh
-mv ./riplauncher.sh /usr/bin/riplauncher
+cp ./riplauncher.sh /usr/bin/riplauncher
 
+echo "Adding rules to udev"
 cat udev.rules > /etc/udev/rules.d/99-sr.rules
 
+echo "Reloading udev rules"
 udevadm control --reload-rules
+
+echo "Reloading systemctl"
+systemctl daemon-reload
