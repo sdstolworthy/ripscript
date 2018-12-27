@@ -1,0 +1,10 @@
+[Unit]
+Description=DVD Rip on %i
+
+[Service]
+EnvironmentFile=/etc/.dvdripconf
+ExecStart=/usr/bin/ripscript "$ARG1"
+StandardOutput=syslog
+
+[Intall]
+WantedBy=default.target

@@ -1,0 +1,1 @@
+KERNEL=="sr[0-9]", ACTION=="change", RUN+="/bin/bash /usr/bin/ripscript '%N'"

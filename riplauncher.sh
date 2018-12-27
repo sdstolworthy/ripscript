@@ -1,0 +1,10 @@
+#!/bin/bash
+touch /etc/.dvdripconf
+touch /var/log/ripscript.log
+{
+    date
+    SERVNUM=$(date +%s)
+    echo "<<<<<<<<<<DRIVE IS: $1>>>>>>>>>>>>"
+    echo -e "ARG1=$1" > /etc/.dvdripconf
+    systemctl start dvdrip@$SERVNUM.service
+} &>> /var/log/ripscript.log
