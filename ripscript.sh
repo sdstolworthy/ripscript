@@ -38,7 +38,5 @@ fi
     
     echo $DVDNAME
     eject
-    echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>Copying $DVDNAME to /mnt/movie/$DVDNAME.mkv"
-    mv $WORKPATH/* /media/server/$DVDNAME.mkv
     echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>Copying Finished! Script Complete!"
 } &>> "/var/log/rip.log"
