@@ -6,5 +6,5 @@ EnvironmentFile=/etc/.dvdripconf
 ExecStart=/usr/bin/ripscript "$ARG1"
 StandardOutput=syslog
 
-[Intall]
+[Install]
 WantedBy=default.target
