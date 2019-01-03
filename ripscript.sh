@@ -27,7 +27,7 @@ fi
     DVDNAME=${DVDNAME:0:$len}
     
     
-    echo "\ndrive is: $1\n\n"
+    echo "drive is: $1"
     DVDNAME=$(isoinfo -i $1 -d | grep "Volume id:" | awk '{print $3}')
     
     if [[ ${DVDNAME^^} == DVD_VIDEO ]]; then
@@ -38,7 +38,7 @@ fi
     echo ">>>>>>>>>>>>>>>>>>>>>>>>Beginning script to rip: $DVDNAME"
     echo $USER
     
-    echo "\nTHIS IS YOUR DISC NUMBER: $DISNUM\n\n"
+    echo "THIS IS YOUR DISC NUMBER: $DISNUM"
     mkdir -p $WORKPATH
     rm $WORKPATH/*
     makemkvcon --minlength=3600 -r --decrypt --directio=true mkv disc:$DISNUM all $WORKPATH
