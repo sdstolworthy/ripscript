@@ -1,7 +1,7 @@
 #!/bin/bash                                                                          
 touch /etc/.dvdripconf                                                               
 touch /var/log/ripscript.log                                                         
-dd if=$1 of=/dev/null bs=1 count=1 2>/dev/null                                       
+grep -qF "$1" /etc/mtab;
 RESULT=$?                                                                            
                                                                                      
 #do this individually                                                                
