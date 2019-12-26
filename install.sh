@@ -14,6 +14,8 @@ mkdir -p /etc/systemd/system
 mkdir -p /etc/udev/rules.d/
 mkdir -p /var/rips
 
+apt install -y e2fsprogs
+
 echo "Installing files"
 chmod a+x ./dvdrip@.service
 /bin/cp -rf ./dvdrip@.service /etc/systemd/system
