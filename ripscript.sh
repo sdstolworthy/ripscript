@@ -33,4 +33,5 @@ fi
     
     echo $DVDNAME
     echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>Copying Finished! Script Complete!"
+    eject $1
 } &>> "/var/log/rip.log"
