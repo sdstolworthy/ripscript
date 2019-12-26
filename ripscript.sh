@@ -1,8 +1,13 @@
 #!/bin/bash
+
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
+get_dvd_name() {
+
+}
 {
     sleep 2
     date
@@ -30,17 +35,16 @@ fi
     echo "drive is: $1"
     DVDNAME=$(isoinfo -i $1 -d | grep "Volume id:" | awk '{print $3}')
     
-    if [[ ${DVDNAME^^} == DVD_VIDEO ]]; then
-        DVDNAME+=$((`date +%s`*1000+`date +%-N`/1000000))
-    fi
-    WORKPATH="/var/rips"
+    DVDNAME+=$((`date +%s`*1000+`date +%-N`/1000000))
+    # if [[ ${DVDNAME^^} == DVD_VIDEO ]]; then
+    # fi
+    WORKPATH="/mnt/network/ripped_videos"
 
     echo ">>>>>>>>>>>>>>>>>>>>>>>>Beginning script to rip: $DVDNAME"
     echo $USER
     
     echo "THIS IS YOUR DISC NUMBER: $DISNUM"
     mkdir -p $WORKPATH
-    rm $WORKPATH/*
     makemkvcon --minlength=3600 -r --decrypt --directio=true mkv disc:$DISNUM all $WORKPATH
     
     echo $DVDNAME
